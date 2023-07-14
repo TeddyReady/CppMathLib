@@ -25,9 +25,6 @@ long fastPower(long num, long deg);
 //Faster binary module power
 long modulePower(long num, long deg, int module);
 
-//Maximum of two numbers
-int max(int a, int b);
-
 // Num on module
 int toMod(int num, int module);
 

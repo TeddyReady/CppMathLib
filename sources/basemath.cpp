@@ -1,3 +1,7 @@
+///////////////////////////
+/*      @TeddyReady      */
+///////////////////////////
+
 #include "basemath.h"
 
 std::vector<std::pair<int, int>> decompositionToSimple(int num)
@@ -66,11 +70,6 @@ long modulePower(long num, long deg, int module) {
     return (subNum * subNum) % module;
   else
     return (num * subNum * subNum) % module;
-}
-
-int max(int a, int b)
-{
-    return a > b ? a : b;
 }
 
 int toMod(int num, int module)

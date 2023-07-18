@@ -71,7 +71,7 @@ long modulePower(long num, long deg, int module) {
 int toMod(int num, int module)
 {
     if (module <= 1) {
-        qDebug() << "Incorrect module!";
+        std::cerr << "ERROR in basemath.cpp: Incorrect module!" << std::endl;
         return -1;
     }
     if (num < 0) {

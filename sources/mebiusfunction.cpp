@@ -1,7 +1,14 @@
 #include "mebiusfunction.h"
 
 MebiusFunction::MebiusFunction() : number(1) {}
-MebiusFunction::MebiusFunction(int number) : number(number) {}
+MebiusFunction::MebiusFunction(int number) : number(number)
+{
+    if (number < 0)
+    {
+        std::cerr << "ERROR in mebiusfunction.cpp: Number cannot be lower zero!" << std::endl;
+        this->number = 1;
+    }
+}
 
 int MebiusFunction::solve() const 
 {

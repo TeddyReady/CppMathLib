@@ -1,7 +1,14 @@
 #include "eulerfunction.h"
 
 EulerFunction::EulerFunction() : number(1) {}
-EulerFunction::EulerFunction(int number) : number(number) {}
+EulerFunction::EulerFunction(int number) : number(number)
+{
+    if (number < 0)
+    {
+        std::cerr << "ERROR in eulerfunction.cpp: Number cannot be lower zero!" << std::endl;
+        this->number = 1;
+    }
+}
 
 int EulerFunction::solve() const 
 {

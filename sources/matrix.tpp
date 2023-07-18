@@ -47,7 +47,7 @@ public:
     {
         if (rows != other.rows || cols != other.cols)
         {
-            std::cerr << "ERROR in Matrix.tpp: Matrix dimensions does be equal!";
+            std::cerr << "ERROR in Matrix.tpp: Matrix dimensions does be equal!" << std::endl;
             return *this;
         }
 
@@ -55,7 +55,7 @@ public:
 
         for (std::size_t i = 0; i < rows; ++i) 
             for (std::size_t j = 0; j < cols; ++j)
-                result.data[i][j] = data[i][j] + matrix.data[i][j];
+                result.data[i][j] = data[i][j] + result.data[i][j];
 
         return result;
     }
@@ -79,7 +79,7 @@ public:
     {
         if (cols != other.rows)
         {
-            std::cerr << "ERROR in Matrix.tpp: Matrix rows does be equal with cols!";
+            std::cerr << "ERROR in Matrix.tpp: Matrix rows does be equal with cols!" << std::endl;
             return *this;    
         }
 
@@ -103,7 +103,7 @@ public:
     {
         if(!isSquare() || det() == 0) 
         {
-            std::cerr << "ERROR in Matrix.tpp: Matrix does be square and det cannot be equal to zero!";
+            std::cerr << "ERROR in Matrix.tpp: Matrix does be square and det cannot be equal to zero!" << std::endl;
             return *this;
         }
 
@@ -122,7 +122,7 @@ public:
     {
         if (!isSquare())
         {
-            std::cerr << "ERROR in Matrix.tpp: Cannot calculate det of non sqyare matrix!";
+            std::cerr << "ERROR in Matrix.tpp: Cannot calculate det of non sqyare matrix!" << std::endl;
             return -100000000;            
         }
         if (rows == 1)
@@ -166,7 +166,7 @@ public:
     {
         if (!isSquare()) 
         {
-            std::cerr << "ERROR in Matrix.tpp: Cannot find minor of non square matrix!";
+            std::cerr << "ERROR in Matrix.tpp: Cannot find minor of non square matrix!" << std::endl;
             return *this;
         }
 

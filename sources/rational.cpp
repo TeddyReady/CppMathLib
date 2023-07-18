@@ -17,7 +17,7 @@ void Rational::simplify()
 
     if (den == 0)
     {
-        qDebug() << "ERROR in Rational.cpp: Denumenator cannot be zero!";
+        std::cerr << "ERROR in Rational.cpp: Denumenator cannot be zero!" << std::endl;
         this->den = 1;
     }
 }
@@ -113,8 +113,8 @@ Rational::operator double() const
     return static_cast<double>(num/den);
 }
 
-QDebug operator<< (QDebug dbg, const Rational &other)
+std::ostream& operator<< (std::ostream& out, const Rational &other)
 {
-    dbg << QString::number(other.num) + "/" + QString::number(other.den);
-    return dbg;
+    out << other.num << "/" << other.den;
+    return out;
 }

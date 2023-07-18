@@ -1,9 +1,5 @@
 #ifndef BASEMATH_H
 #define BASEMATH_H
-#include <QString>
-#include <QVector>
-#include <QDebug>
-
 #include <algorithm>
 #include <iostream>
 #include <vector>

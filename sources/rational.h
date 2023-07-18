@@ -33,7 +33,7 @@ public:
     operator int()    const;
     operator double() const;
 
-    friend QDebug operator<< (QDebug dbg, const Rational &other);
+    friend std::ostream& operator<< (std::ostream& out, const Rational &other);
 };
 
 #endif //RATIONAL_H

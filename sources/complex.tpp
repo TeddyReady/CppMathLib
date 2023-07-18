@@ -118,24 +118,24 @@ public:
     }
 
 
-    friend QDebug operator<< (QDebug dbg, const Complex<T> &other)
+    friend std::ostream& operator<< (std::ostream &out, const Complex<T> &other)
     {
         if (other.b > 0)
             if (other.b == 1)
-                dbg << QString::number(other.a) + "+i";
+                out << other.a + "+i";
             else
-                dbg << QString::number(other.a) + "+" + QString::number(other.b) + "i";
+                out << other.a + "+" + other.b + "i";
 
         else if (other.b == 0)
-            dbg << QString::number(other.a);
+            out << other.a;
 
         else
             if (other.b == -1)
-                dbg << QString::number(other.a) + "-i";
+                out << other.a + "-i";
             else
-                dbg << QString::number(other.a) + QString::number(other.b) + "i";
+                out << other.a + other.b + "i";
 
-        return dbg;
+        return out;
     }
 };
 

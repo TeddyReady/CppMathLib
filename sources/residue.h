@@ -1,6 +1,6 @@
 #ifndef RESIDUE_H
 #define RESIDUE_H
-#include "basemath.h"
+#include "eulerfunction.h"
 
 class Zn {
 public:
@@ -38,6 +38,33 @@ public:
     Zp operator~ ()                   const;
     Zp operator/ (const Zp &other)    const;
     void operator/= (const Zp &other);
+};
+
+// Zn* inverse elements group
+class MultiGroup_Zn {
+private:
+    int n, module;
+
+public:
+    explicit MultiGroup_Zn();
+    explicit MultiGroup_Zn(int n, int module);
+
+    void simplify();
+
+    MultiGroup_Zn operator~ ()                           const;
+    MultiGroup_Zn operator* (const MultiGroup_Zn &other) const;
+    void operator*= (const MultiGroup_Zn &other);
+    MultiGroup_Zn operator/ (const MultiGroup_Zn &other) const;
+    void operator/= (const MultiGroup_Zn &other);
+
+    bool operator== (const MultiGroup_Zn &other) const;
+    bool operator!= (const MultiGroup_Zn &other) const;
+    bool operator< (const MultiGroup_Zn &other)  const;
+    bool operator<= (const MultiGroup_Zn &other) const;
+    bool operator> (const MultiGroup_Zn &other)  const;
+    bool operator>= (const MultiGroup_Zn &other) const;
+
+    friend std::ostream& operator<< (std::ostream& out, const MultiGroup_Zn &other);
 };
 
 #endif // RESIDUE_H

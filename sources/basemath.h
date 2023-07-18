@@ -1,6 +1,13 @@
 #ifndef BASEMATH_H
 #define BASEMATH_H
-#include "include.h"
+#include <QString>
+#include <QVector>
+#include <QDebug>
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <cmath>
 
 //Number decomposition to simple
 std::vector<std::pair<int, int>> decompositionToSimple(int num);

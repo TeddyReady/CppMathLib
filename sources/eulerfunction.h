@@ -2,29 +2,17 @@
 #define EULERFUNCTION_H
 #include "basemath.h"
 
-enum class EulerFunctionOptions {
-    Default, Primes,
-    PrimesDegrees, MultiplyPrimes,
-    MultiplyPrimesDegrees
-};
+class EulerFunction {
+private:
+    int number;
 
-class EulerFunction : protected BaseMath {
 public:
     explicit EulerFunction();
     explicit EulerFunction(int number);
 
-    void create(const QVector<QVariant> &options);
-    QString description();
-    QString task(const QString &optional);
-    QString answer(const QVariant &other);
-
-    void setTaskOption(EulerFunctionOptions option);
     int solve() const;
-    void setTask(int num) { number = num; }
-    int getTask() const { return number; }
-private:
-    EulerFunctionOptions taskType;
-    int number;
+    void set(int number);
+    int get() const;
 };
 
 #endif // EULERFUNCTION_H

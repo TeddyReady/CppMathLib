@@ -2,22 +2,17 @@
 #define MEBIUSFUNCTION_H
 #include "basemath.h"
 
-enum class MebiusFunctionOptions {
-    Default, Primes,
-    EvenPrimes, NotEvenPrimes,
-    PrimeDegree
-};
-
 class MebiusFunction {
+private:
+    int number;
+
 public:
     explicit MebiusFunction();
     explicit MebiusFunction(int number);
 
     int solve() const;
-    void setTask(int num) { number = num; }
-    int getTask() const { return number; }
-private:
-    int number;
+    void set(int number);
+    int get() const;
 };
 
 #endif // MEBIUSFUNCTION_H

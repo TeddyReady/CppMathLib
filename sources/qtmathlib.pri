@@ -7,7 +7,7 @@ SOURCES += \
            $$PWD/basemath.cpp \
            $$PWD/eulerfunction.cpp \
 #           $$PWD/groupproperties.cpp \
-#           $$PWD/mebiusfunction.cpp \
+           $$PWD/mebiusfunction.cpp \
             $$PWD/rational.cpp \
 #           $$PWD/ringofmembers.cpp \
 #           $$PWD/ringresidue.cpp \
@@ -22,7 +22,7 @@ HEADERS += \
            $$PWD/complex.tpp \
            $$PWD/include.h \
            $$PWD/matrix.tpp
-#           $$PWD/mebiusfunction.h \
+           $$PWD/mebiusfunction.h \
            $$PWD/rational.h \
 #           $$PWD/ringofmembers.h \
 #           $$PWD/ringresidue.h \

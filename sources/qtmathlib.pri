@@ -21,6 +21,7 @@ HEADERS += \
 #           $$PWD/groupproperties.h \
            $$PWD/complex.tpp \
            $$PWD/include.h \
+           $$PWD/matrix.tpp
 #           $$PWD/mebiusfunction.h \
            $$PWD/rational.h \
 #           $$PWD/ringofmembers.h \

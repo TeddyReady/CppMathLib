@@ -2,115 +2,155 @@
 #define MATRIX_TPP
 #include "basemath.h"
 
-enum class MatrixOptions {
-    Sum, Diff, Multy,
-      Inverse, Det
-};
-
 template <class T>
 class Matrix {
+private:
+    std::size_t rows, cols;
+    std::vector<std::vector<T>> data;
+
 public:
-    Matrix(): rows(0), cols(0), gen(QRandomGenerator::global()) {}
-    Matrix(std::size_t rows, std::size_t cols, T diagonalValue): rows(rows), cols(cols),
-        gen(QRandomGenerator::global())
+    explicit Matrix(): rows(0), cols(0) {}
+    explicit Matrix(std::size_t rows, std::size_t cols): rows(rows), cols(cols)
     {
         data.resize(rows);
-        for(std::size_t i = 0; i < rows; ++i){
-            for(std::size_t j = 0; j < cols; ++j){
-                if (i == j)
-                    data[i].emplace_back(diagonalValue);
-                else data[i].emplace_back(0);
-            }
-        }
+        for(std::size_t i = 0; i < rows; ++i)
+            data[i].resize(cols);
     }
-
-    Matrix<T> operator +(const Matrix<T> &matrix) const
+    explicit Matrix(std::size_t rows, std::size_t cols, T diagonalValue): Matrix<T>(rows, cols)
     {
-        if (rows == matrix.rows && cols == matrix.cols){
-            Matrix<T> tmp(rows, cols, 0);
-
-            for (std::size_t i = 0; i < rows; ++i)
-                for (std::size_t j = 0; j < cols; ++j)
-                    tmp.data[i][j] = data[i][j] + matrix.data[i][j];
-
-            return tmp;
-        }
-        return *this;
-    }
-    Matrix<T> operator -(const Matrix<T> &matrix) const
-    {
-        if(rows == matrix.rows && cols == matrix.cols) {
-            Matrix<T> tmp(rows, cols, 0);
-
-            for (std::size_t i = 0; i < rows; ++i)
-                for (std::size_t j = 0; j < cols; ++j)
-                    tmp.data[i][j] = data[i][j] - matrix.data[i][j];
-
-            return tmp;
-        }
-        return *this;
-    }
-    Matrix<T> operator *(const Matrix<T> &matrix) const
-    {
-        if (matrix.rows == cols && rows == matrix.cols) {
-            Matrix<T> tmp(rows, matrix.cols, 0);
-
-            for(std::size_t i = 0; i < rows; ++i)
-                for(std::size_t j = 0; j < matrix.cols; ++j)
-                    for(std::size_t k = 0; k < matrix.rows; ++k)
-                        tmp.data[i][j] += data[i][k] * matrix.data[k][j];
-
-            return tmp;
-        }
-        return *this;
-    }
-    // Return Matrix whithout 1/det
-    Matrix<T> operator ~() const
-    {
-        if(isSquare() && det() != 0) {
-            Matrix<T> tmp(rows, cols, 0);
-            for (std::size_t i = 0; i < rows; ++i)
+        for(std::size_t i = 0; i < rows; ++i)
+            for(std::size_t j = 0; j < cols; ++j)
             {
-                for (std::size_t j = 0; j < cols; ++j)
-                    tmp.data[i][j] = minor(i, j).det() * fastPower(-1, i + j);
-
+                if (i == j) data[i][j] = diagonalValue;
+                else data[i][j] = 0;
             }
-            return tmp.trans();
-        }
-        return *this;
+    }
+    explicit Matrix(const Matrix<T> &other): Matrix<T>(other.rows, other.cols)
+    {
+        for(std::size_t i = 0; i < rows; ++i)
+            for(std::size_t j = 0; j < cols; ++j)
+                data[i][j] = other.data[i][j];
     }
 
-    bool isSquare() const { return (cols != rows) ? false : true; }
+    Matrix<T> operator- () const
+    {
+        Matrix<T> result(*this);
+
+        for(std::size_t i = 0; i < result.rows; ++i)
+            for(std::size_t j = 0; j < result.cols; ++j)
+                result.data[i][j] = -result.data[i][j];
+
+        return result;
+    }
+
+    Matrix<T> operator+ (const Matrix<T> &other) const
+    {
+        if (rows != other.rows || cols != other.cols)
+        {
+            std::cerr << "ERROR in Matrix.tpp: Matrix dimensions does be equal!";
+            return *this;
+        }
+
+        Matrix<T> result(rows, cols);
+
+        for (std::size_t i = 0; i < rows; ++i) 
+            for (std::size_t j = 0; j < cols; ++j)
+                result.data[i][j] = data[i][j] + matrix.data[i][j];
+
+        return result;
+    }
+
+    void operator+= (const Matrix<T> &other) const
+    {
+        *this = *this + other;
+    }
+
+    Matrix<T> operator- (const Matrix<T> &other) const
+    {
+        return *this + (-other);
+    }
+
+    void operator-= (const Matrix<T> &other) const
+    {
+        *this = *this - other;
+    }
+
+    Matrix<T> operator* (const Matrix<T> &other) const
+    {
+        if (cols != matrix.rows) 
+        {
+            std::cerr << "ERROR in Matrix.tpp: Matrix rows does be equal with cols!";
+            return *this;    
+        }
+
+        Matrix<T> result(rows, matrix.cols, 0);
+
+        for(std::size_t i = 0; i < rows; ++i)
+            for(std::size_t j = 0; j < matrix.cols; ++j)
+                for(std::size_t k = 0; k < matrix.rows; ++k)
+                    tmp.data[i][j] += data[i][k] * matrix.data[k][j];
+
+        return result;
+    }
+
+    void operator*= (const Matrix<T> &other) const
+    {
+        *this = *this * other;
+    }
+
+    // Return Matrix whithout 1/det
+    Matrix<T> operator~ () const
+    {
+        if(!isSquare() || det() == 0) 
+        {
+            std::cerr << "ERROR in Matrix.tpp: Matrix does be square and det cannot be equal to zero!";
+            return *this;
+        }
+
+        Matrix<T> result(rows, cols, 0);
+
+        for (std::size_t i = 0; i < rows; ++i)
+            for (std::size_t j = 0; j < cols; ++j)
+                tmp.data[i][j] = minor(i, j).det() * fastPower(-1, i + j);
+
+        return tmp.trans();
+    }
+
+    bool isSquare() const { return (cols == rows); }
+
     double det() const
     {
-        if (isSquare()) {
-            if (rows == 1)
-                return data[0][0];
-            else if (rows == 2)
-                return (data[0][0] * data[1][1] - data[0][1] * data[1][0]);
-            else {
-                Matrix<T> tmp(rows - 1, rows - 1, 0);
-                double det = 0;
-                std::size_t k1, k2;
-                for(size_t i = 0; i < rows; ++i) {
-                    k1 = 0;
-                    for(size_t j = 1; j < rows; ++j) {
-                        k2 = 0;
-                        for(size_t k = 0; k < rows; k++) {
-                            if (k != i) {
-                                tmp.data[k1][k2] = data[j][k];
-                                ++k2;
-                            }
-                        }
-                        ++k1;
-                    }
-                    det += fastPower(-1, i + 2) * data[0][i] * tmp.det();
-                }
-                return det;
-            }
+        if (!isSquare())
+        {
+            std::cerr << "ERROR in Matrix.tpp: Cannot calculate det of non sqyare matrix!";
+            return -100000000;            
         }
-        return -100000000;
+        if (rows == 1)
+            return data[0][0];
+        else if (rows == 2)
+            return (data[0][0] * data[1][1] - data[0][1] * data[1][0]);
+        else {
+            Matrix<T> tmp(rows - 1, rows - 1, 0);
+            double det = 0;
+            std::size_t k1, k2;
+            for(size_t i = 0; i < rows; ++i) {
+                k1 = 0;
+                for(size_t j = 1; j < rows; ++j) {
+                    k2 = 0;
+                    for(size_t k = 0; k < rows; k++) {
+                        if (k != i) {
+                            tmp.data[k1][k2] = data[j][k];
+                            ++k2;
+                        }
+                    }
+                    ++k1;
+                }
+                det += fastPower(-1, i + 2) * data[0][i] * tmp.det();
+            }
+            return det;
+        }
     }
+
     Matrix<T> trans() const
     {
         Matrix<T> matrix(cols, rows, 0);
@@ -121,13 +161,22 @@ public:
 
         return matrix;
     }
+
     Matrix<T> minor(std::size_t x, std::size_t y) const
     {
-        if (!isSquare()) return *this;
+        if (!isSquare()) 
+        {
+            std::cerr << "ERROR in Matrix.tpp: Cannot find minor of non square matrix!";
+            return *this;
+        }
+
         Matrix<T> tmp(rows - 1, rows - 1, 0);
+        
         tmp.data.clear();
         tmp.data.resize(data.size() - 1);
+        
         size_t countIndex = -1;
+        
         for (std::size_t i = 0; i < rows; ++i)
         {
             if (i == x) continue;
@@ -140,32 +189,6 @@ public:
         }
         return tmp;
     }
-    QString getMatrix() const
-    {
-        QString result = "\\begin{pmatrix}";
-        for (std::size_t i = 0; i < data.size(); ++i) {
-            for (std::size_t j = 0; j < data[i].size(); ++j) {
-                result += QString::number(data[i][j]);
-                if (j + 1 != data[i].size()) result += "&";
-                else result += "\\\\";
-            }
-        } result += "\\end{pmatrix}";
-        return result;
-    }
-    void setTask(std::size_t rows, std::size_t cols, int minN, int maxN)
-    {
-        data.clear();
-        this->rows = rows;
-        this->cols = cols;
-        data.resize(rows);
-        for (std::size_t i = 0; i < rows; ++i)
-            for(std::size_t j = 0; j < cols; ++j)
-                data[i].emplace_back(gen->bounded(minN, maxN + 1));
-    }
-private:
-    std::size_t rows, cols;
-    std::vector<std::vector<T>> data;
-    QRandomGenerator *gen;
 };
 
 #endif // MATRIX_TPP

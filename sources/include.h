@@ -1,8 +1,3 @@
-////////////////////////////////
-/* File with general includes */
-/*        @TeddyReady        */
-////////////////////////////////
-
 #ifndef COMMON_H
 #define COMMON_H
 

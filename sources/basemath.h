@@ -1,8 +1,3 @@
-////////////////////////////////////
-/* Custom general math algorithms */
-/*           @TeddyReady          */
-////////////////////////////////////
-
 #ifndef BASEMATH_H
 #define BASEMATH_H
 #include "include.h"

@@ -1,8 +1,3 @@
-///////////////////////////
-/* Complex number class */
-/*      @TeddyReady      */
-///////////////////////////
-
 #ifndef COMPLEX_H
 #define COMPLEX_H
 #include "basemath.h"

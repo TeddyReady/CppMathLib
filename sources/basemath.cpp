@@ -1,7 +1,3 @@
-///////////////////////////
-/*      @TeddyReady      */
-///////////////////////////
-
 #include "basemath.h"
 
 std::vector<std::pair<int, int>> decompositionToSimple(int num)

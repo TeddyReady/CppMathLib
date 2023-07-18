@@ -1,7 +1,3 @@
-///////////////////////////
-/*      @TeddyReady      */
-///////////////////////////
-
 #include "rational.h"
 
 Rational::Rational() : num(0), den(1) {}

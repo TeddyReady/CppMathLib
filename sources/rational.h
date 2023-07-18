@@ -1,8 +1,3 @@
-///////////////////////////
-/* Rational number class */
-/*      @TeddyReady      */
-///////////////////////////
-
 #ifndef RATIONAL_H
 #define RATIONAL_H
 #include "basemath.h"

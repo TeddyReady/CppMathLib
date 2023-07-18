@@ -4,10 +4,10 @@ Rational::Rational() : num(0), den(1) {}
 Rational::Rational(int num) : num(num), den(1) {}
 Rational::Rational(int num, int den) : num(num), den(den)
 {
-    this->simplify();
+    simplify();
 }
 
-Rational Rational::simplify()
+void Rational::simplify()
 {
     int gcd = GCD(num, den);
     if (gcd != 1)
@@ -20,8 +20,6 @@ Rational Rational::simplify()
         qDebug() << "ERROR in Rational.cpp: Denumenator cannot be zero!";
         this->den = 1;
     }
-
-    return *this;
 }
 
 Rational Rational::operator- () const

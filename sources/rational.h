@@ -11,7 +11,7 @@ public:
     explicit Rational(int num);
     explicit Rational(int num, int den);
 
-    Rational simplify();
+    void simplify();
 
     Rational operator- ()                      const;
     Rational operator+ (const Rational &other) const;

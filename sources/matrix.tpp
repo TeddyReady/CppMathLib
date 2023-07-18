@@ -77,18 +77,18 @@ public:
 
     Matrix<T> operator* (const Matrix<T> &other) const
     {
-        if (cols != matrix.rows) 
+        if (cols != other.rows)
         {
             std::cerr << "ERROR in Matrix.tpp: Matrix rows does be equal with cols!";
             return *this;    
         }
 
-        Matrix<T> result(rows, matrix.cols, 0);
+        Matrix<T> result(rows, other.cols, 0);
 
         for(std::size_t i = 0; i < rows; ++i)
-            for(std::size_t j = 0; j < matrix.cols; ++j)
-                for(std::size_t k = 0; k < matrix.rows; ++k)
-                    tmp.data[i][j] += data[i][k] * matrix.data[k][j];
+            for(std::size_t j = 0; j < other.cols; ++j)
+                for(std::size_t k = 0; k < other.rows; ++k)
+                    result.data[i][j] += data[i][k] * other.data[k][j];
 
         return result;
     }
@@ -111,9 +111,9 @@ public:
 
         for (std::size_t i = 0; i < rows; ++i)
             for (std::size_t j = 0; j < cols; ++j)
-                tmp.data[i][j] = minor(i, j).det() * fastPower(-1, i + j);
+                result.data[i][j] = minor(i, j).det() * fastPower(-1, i + j);
 
-        return tmp.trans();
+        return result.trans();
     }
 
     bool isSquare() const { return (cols == rows); }

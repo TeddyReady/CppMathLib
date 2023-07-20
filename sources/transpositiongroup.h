@@ -2,14 +2,6 @@
 #define TRANSPOSITIONGROUP_H
 #include "basemath.h"
 
-enum class TranspositionGroupOptions {
-       Write, Multiply,
-    Inverse,  Cycle, Mod2,
-        Count, Order,
-        Decomposition,
-          Neighbor
-};
-
 enum class ViewMode {
     Standart, Cycle,
      Decomposition,
@@ -19,26 +11,25 @@ enum class ViewMode {
 class TranspositionGroup {
 public:
     explicit TranspositionGroup();
-    explicit TranspositionGroup(QVector<std::pair<int, int>>);
-    explicit TranspositionGroup(const QString &str, int order);
-    explicit TranspositionGroup(QVector<int>, int);
+    explicit TranspositionGroup(std::vector<std::pair<int, int>>);
+    explicit TranspositionGroup(const std::string &str, int order);
+    explicit TranspositionGroup(std::vector<int>, int);
 
-    TranspositionGroup operator *(TranspositionGroup &trans);
-    TranspositionGroup operator ~();
+    TranspositionGroup operator* (TranspositionGroup &trans);
+    TranspositionGroup operator~ ();
     bool operator ==(const TranspositionGroup& trans);
 
-    void setTask(int, ViewMode mode, bool identityForbidden = false);
     int getTask();
-    QVector<QVector<int>>& getTransposition();
+    std::vector<std::vector<int>>& getTransposition();
     ViewMode getViewMode();
-    QString writeToMode(ViewMode, bool forTest = false);
-    QString cycleType();
+    std::string writeToMode(ViewMode, bool forTest = false);
+    std::string cycleType();
     int getHaos();
-    QString getEven(bool forTest = false);
+    std::string getEven(bool forTest = false);
     int getOrder();
     TranspositionGroup simplify(int);
 private:
-    QVector<QVector<int>> tp;
+    std::vector<std::vector<int>> tp;
     ViewMode mode;
 };
 

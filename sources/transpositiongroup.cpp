@@ -2,15 +2,15 @@
 
 TranspositionGroup::TranspositionGroup() {}
 
-TranspositionGroup::TranspositionGroup(QVector<std::pair<int, int>> data)
+TranspositionGroup::TranspositionGroup(std::vector<std::pair<int, int>> data)
 {
     std::sort(data.begin(), data.end());
-    QVector<int> multi, single;
-    for (int i = 0; i < data.size(); i++) {
+    std::vector<int> multi, single;
+    for (size_t i = 0; i < data.size(); i++) {
         bool access = true;
         if (data[i].first != data[i].second) {
-            for (int K = 0; K < tp.size(); K++) {
-                for (int k = 0; k < tp[K].size(); k++) {
+            for (size_t K = 0; K < tp.size(); K++) {
+                for (size_t k = 0; k < tp[K].size(); k++) {
                     if (tp[K][k] == data[i].second) {
                         access = false;
                         break;
@@ -335,47 +335,17 @@ QString TranspositionGroup::writeToMode(ViewMode mode, bool forTest){
     }} return result;
 }
 
-void TranspositionGroup::setTask(int n, ViewMode mode, bool identityForbidden)
-{
-    QRandomGenerator *gen = QRandomGenerator::global();
-    int curValue;
-    QVector<int> sizes, id, tmp;
-    //Random weight initializing
-    do {
-        int cnt = 0; sizes.clear();
-        while (cnt != n) {
-            curValue = static_cast<int>(gen->bounded(1, (n + 1) - cnt));
-            sizes.push_back(curValue);
-            cnt += curValue;
-        }
-    } while (identityForbidden && *std::max_element(sizes.begin(), sizes.end()) == 1);
-    //Identity transposition
-    for (int i = 1; i < n + 1; i++) {
-        id.push_back(i);
-    }
-    tp.clear();
-    for (int i = 0; i < sizes.size(); i++) {
-        for (int j = 0; j < sizes[i]; j++) {
-            curValue = static_cast<int>(gen->bounded(0, id.size()));
-            tmp.push_back(id[curValue]);
-            id.removeAt(curValue);
-        }
-        tp.push_back(tmp);
-        tmp.clear();
-    }
-    this->mode = mode;
-    return;
-}
 int TranspositionGroup::getTask()
 {
     int cnt = 0;
-    for (int i = 0; i < tp.size(); i++) {
+    for (size_t i = 0; i < tp.size(); i++)
+    {
         cnt += tp[i].size();
     }
     return cnt;
 }
 
-QVector<QVector<int>>& TranspositionGroup::getTransposition()
+std::vector<std::vector<int>>& TranspositionGroup::getTransposition()
 {
     return tp;
 }
@@ -410,10 +380,11 @@ QString TranspositionGroup::cycleType(){
     str += "]";
     return str;
 }
-int TranspositionGroup::getHaos(){
-    QVector<std::pair<int, int>> result;
-    for (int I = 0; I < tp.size(); I++) {
-        for (int i = 0; i < tp[I].size(); i++) {
+int TranspositionGroup::getHaos()
+{
+    std::vector<std::pair<int, int>> result;
+    for (size_t I = 0; I < tp.size(); I++) {
+        for (size_t i = 0; i < tp[I].size(); i++) {
             if (tp[I].size() > 1) {
                 if (i + 1 != tp[I].size())
                     result.push_back(std::make_pair(tp[I][i], tp[I][i + 1]));
@@ -424,8 +395,8 @@ int TranspositionGroup::getHaos(){
         }
     } std::sort(result.begin(), result.end());
     int count = 0;
-    for (int i = 0; i < result.size(); i++) {
-        for (int j = i; j < result.size() - 1; j++) {
+    for (size_t i = 0; i < result.size(); i++) {
+        for (size_t j = i; j < result.size() - 1; j++) {
             if (result[i].second > result[j + 1].second)
                 count++;
         }
@@ -441,7 +412,7 @@ QString TranspositionGroup::getEven(bool forTest){
 
 int TranspositionGroup::getOrder(){
     int order = tp[0].size();
-    for (int i = 0; i < tp.size() - 1; i++) {
+    for (size_t i = 0; i < tp.size() - 1; i++) {
         order = LCM(order, tp[i + 1].size());
     }
     return order;

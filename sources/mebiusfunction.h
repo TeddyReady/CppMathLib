@@ -12,7 +12,7 @@ public:
 
     int solve() const;
     void set(int number);
-    int get() const;
+    int get()   const;
 };
 
 #endif // MEBIUSFUNCTION_H

@@ -10,8 +10,8 @@ SOURCES += \
            $$PWD/mebiusfunction.cpp \
            $$PWD/rational.cpp \
 #           $$PWD/ringofmembers.cpp \
-           $$PWD/residue.cpp
-#           $$PWD/symbollegandre.cpp \
+           $$PWD/residue.cpp \
+           $$PWD/symbollegandre.cpp \
 #           $$PWD/transpositiongroup.cpp \
 
 HEADERS += \
@@ -25,5 +25,5 @@ HEADERS += \
            $$PWD/rational.h \
 #           $$PWD/ringofmembers.h \
            $$PWD/residue.h \
-#           $$PWD/symbollegandre.h \
+           $$PWD/symbollegandre.h \
 #           $$PWD/transpositiongroup.h \

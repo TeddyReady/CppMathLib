@@ -20,7 +20,7 @@ int SymbolLegandre::solve() const {
         auto data = decompositionToSimple(a);
         for (size_t i = 0; i < data.size(); ++i) {
             if (data[i].second != 1) {
-                for (size_t j = 0; j < data[i].second; ++j) {
+                for (int j = 0; j < data[i].second; ++j) {
                     SymbolLegandre task(data[i].first, p);
                     result *= task.solve();
                 }
@@ -35,6 +35,16 @@ int SymbolLegandre::solve() const {
     }
 }
 
+void SymbolLegandre::set(int a, int p) { this->a = a; this->p = p; }
+
+std::pair<int, int> SymbolLegandre::get() const { return std::make_pair(a, p); }
+
+std::ostream& operator<< (std::ostream& out, const SymbolLegandre &other)
+{
+    out << "(" << other.a << "/" << other.p << ")";
+    return out;
+}
+
 SymbolJacobi::SymbolJacobi() : SymbolLegandre() {}
 SymbolJacobi::SymbolJacobi(int a, int p) : SymbolLegandre(a, p) {}
 
@@ -43,7 +53,7 @@ int SymbolJacobi::solve() const {
     auto data = decompositionToSimple(p);
     for (size_t i = 0; i < data.size(); ++i) {
         if (data[i].second != 1) {
-            for (size_t j = 0; j < data[i].second; ++j) {
+            for (int j = 0; j < data[i].second; ++j) {
                 SymbolLegandre task(a, data[i].first);
                 result *= task.solve();
             }

@@ -190,6 +190,11 @@ public:
         return tmp;
     }
 
+    std::vector<std::vector<T>> get()
+    {
+        return data;
+    }
+
     void set(std::size_t i, std::size_t j, T value)
     {
         if (i < rows && j < cols)

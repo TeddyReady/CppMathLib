@@ -23,9 +23,14 @@ std::vector<std::pair<int, int>> decompositionToSimple(int num)
 
 bool isPrime(int num)
 {
-    if (num % 2 == 0 || num == 1) {
+    num = abs(num);
+
+    if (num == 1)
+        return true;
+
+    if (num % 2 == 0)
         return false;
-    }
+
     for (int i = 3; i <= sqrt(num); i+= 2){
           if (num % i == 0) {
               return false;

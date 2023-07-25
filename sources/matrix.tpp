@@ -190,7 +190,7 @@ public:
         return tmp;
     }
 
-    std::vector<std::vector<T>> get()
+    std::vector<std::vector<T>> get() const
     {
         return data;
     }

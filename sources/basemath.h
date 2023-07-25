@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cmath>
 
 //Number decomposition to simple

@@ -27,6 +27,7 @@ public:
     bool operator> (const Zn &other)  const;
     bool operator>= (const Zn &other) const;
 
+    operator std::string() const;
     friend std::ostream& operator<< (std::ostream& out, const Zn &other);
 };
 
@@ -64,6 +65,7 @@ public:
     bool operator> (const MultiGroup_Zn &other)  const;
     bool operator>= (const MultiGroup_Zn &other) const;
 
+    operator std::string() const;
     friend std::ostream& operator<< (std::ostream& out, const MultiGroup_Zn &other);
 };
 

@@ -113,8 +113,13 @@ Rational::operator double() const
     return static_cast<double>(num/den);
 }
 
+Rational::operator std::string() const
+{
+    return std::to_string(num) + "/" + std::to_string(den);
+}
+
 std::ostream& operator<< (std::ostream& out, const Rational &other)
 {
-    out << other.num << "/" << other.den;
+    out << std::string(other);
     return out;
 }

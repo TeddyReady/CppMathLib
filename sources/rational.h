@@ -30,8 +30,9 @@ public:
     bool operator> (const Rational &other)  const;
     bool operator>= (const Rational &other) const;
 
-    operator int()    const;
-    operator double() const;
+    operator int()         const;
+    operator double()      const;
+    operator std::string() const;
 
     friend std::ostream& operator<< (std::ostream& out, const Rational &other);
 };

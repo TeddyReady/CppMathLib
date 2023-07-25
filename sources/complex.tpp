@@ -117,23 +117,32 @@ public:
         return !(*this < other);
     }
 
+    operator std::string() const
+    {
+        std::string result;
+        if (b > 0) {
+            if (b == 1)
+                result = std::to_string(a) + "+i";
+            else
+                result = std::to_string(a) + "+" + std::to_string(b) + "i";
+        }
+
+        else if (b == 0)
+            result = std::to_string(a);
+
+        else {
+            if (b == -1)
+                result = std::to_string(a) + "-i";
+            else
+                result = std::to_string(a) + std::to_string(b) + "i";
+        }
+
+        return result;
+    }
 
     friend std::ostream& operator<< (std::ostream &out, const Complex<T> &other)
     {
-        if (other.b > 0)
-            if (other.b == 1)
-                out << other.a + "+i";
-            else
-                out << other.a + "+" + other.b + "i";
-
-        else if (other.b == 0)
-            out << other.a;
-
-        else
-            if (other.b == -1)
-                out << other.a + "-i";
-            else
-                out << other.a + other.b + "i";
+        out << std::string(other);
 
         return out;
     }

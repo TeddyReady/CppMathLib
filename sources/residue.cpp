@@ -109,9 +109,14 @@ bool Zn::operator>= (const Zn &other) const
     return !(*this < other); 
 }
 
+Zn::operator std::string() const
+{
+    return std::to_string(n) + " mod(" + std::to_string(module) + ")";
+}
+
 std::ostream& operator<< (std::ostream& out, const Zn &other)
 {
-    out << other.n << " mod(" << other.module << ")";
+    out << std::string(other);
     return out;
 }
 
@@ -253,8 +258,13 @@ bool MultiGroup_Zn::operator>= (const MultiGroup_Zn &other) const
     return !(*this < other);
 }
 
+MultiGroup_Zn::operator std::string() const
+{
+    return std::to_string(n) + " mod(" + std::to_string(module) + ")";
+}
+
 std::ostream& operator<< (std::ostream& out, const MultiGroup_Zn &other)
 {
-    out << other.n << " mod(" << other.module << ")";
+    out << std::string(other);
     return out;
 }

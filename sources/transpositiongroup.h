@@ -9,6 +9,9 @@ enum class ViewMode {
 };
 
 class TranspositionGroup {
+private:
+    std::vector<std::vector<int>> tp;
+
 public:
     explicit TranspositionGroup();
     explicit TranspositionGroup(std::vector<std::pair<int, int>>);
@@ -19,18 +22,17 @@ public:
     TranspositionGroup operator~ ();
     bool operator ==(const TranspositionGroup& trans);
 
-    int getTask();
+    int getTask() const;
     std::vector<std::vector<int>>& getTransposition();
-    ViewMode getViewMode();
-    std::string writeToMode(ViewMode, bool forTest = false);
+    std::string writeToMode(ViewMode, bool forTest = false) const;
     std::string cycleType();
     int getHaos();
     std::string getEven(bool forTest = false);
     int getOrder();
     TranspositionGroup simplify(int);
-private:
-    std::vector<std::vector<int>> tp;
-    ViewMode mode;
+
+    operator std::string() const;
+    friend std::ostream& operator<< (std::ostream& out, const TranspositionGroup &other);
 };
 
 #endif // TRANSPOSITIONGROUP_H

@@ -116,8 +116,7 @@ Zn::operator std::string() const
 
 std::ostream& operator<< (std::ostream& out, const Zn &other)
 {
-    out << std::string(other);
-    return out;
+    return out << std::string(other);
 }
 
 Zp::Zp() : Zn() {}
@@ -265,6 +264,5 @@ MultiGroup_Zn::operator std::string() const
 
 std::ostream& operator<< (std::ostream& out, const MultiGroup_Zn &other)
 {
-    out << std::string(other);
-    return out;
+    return out << std::string(other);
 }

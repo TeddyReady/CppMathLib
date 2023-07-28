@@ -142,9 +142,7 @@ public:
 
     friend std::ostream& operator<< (std::ostream &out, const Complex<T> &other)
     {
-        out << std::string(other);
-
-        return out;
+        return out << std::string(other);
     }
 };
 

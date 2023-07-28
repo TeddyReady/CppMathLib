@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <map>
 
 //Number decomposition to simple
 std::vector<std::pair<int, int>> decompositionToSimple(int num);

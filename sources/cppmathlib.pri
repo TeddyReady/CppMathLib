@@ -12,7 +12,7 @@ SOURCES += \
 #           $$PWD/ringofmembers.cpp \
            $$PWD/residue.cpp \
            $$PWD/symbollegandre.cpp \
-#           $$PWD/transpositiongroup.cpp \
+           $$PWD/transpositiongroup.cpp \
 
 HEADERS += \
 #           $$PWD/algebrastructures.h \
@@ -26,4 +26,4 @@ HEADERS += \
 #           $$PWD/ringofmembers.h \
            $$PWD/residue.h \
            $$PWD/symbollegandre.h \
-#           $$PWD/transpositiongroup.h \
+           $$PWD/transpositiongroup.h \

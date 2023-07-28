@@ -41,8 +41,7 @@ std::pair<int, int> SymbolLegandre::get() const { return std::make_pair(a, p); }
 
 std::ostream& operator<< (std::ostream& out, const SymbolLegandre &other)
 {
-    out << "(" << other.a << "/" << other.p << ")";
-    return out;
+    return out << "(" << other.a << "/" << other.p << ")";
 }
 
 SymbolJacobi::SymbolJacobi() : SymbolLegandre() {}

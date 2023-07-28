@@ -120,6 +120,5 @@ Rational::operator std::string() const
 
 std::ostream& operator<< (std::ostream& out, const Rational &other)
 {
-    out << std::string(other);
-    return out;
+    return out << std::string(other);
 }

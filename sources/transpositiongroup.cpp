@@ -430,6 +430,11 @@ TranspositionGroup TranspositionGroup::simplify(int order){
     } return *this;
 }
 
+void TranspositionGroup::clear()
+{
+    tp.clear();
+}
+
 TranspositionGroup::operator std::string() const
 {
     return writeToMode(ViewMode::Cycle);

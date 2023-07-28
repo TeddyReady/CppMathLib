@@ -30,6 +30,7 @@ public:
     std::string getEven(bool forTest = false);
     int getOrder();
     TranspositionGroup simplify(int);
+    void clear();
 
     operator std::string() const;
     friend std::ostream& operator<< (std::ostream& out, const TranspositionGroup &other);

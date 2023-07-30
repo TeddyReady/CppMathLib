@@ -119,7 +119,7 @@ bool Zn::operator>= (const Zn &other) const
 
 Zn::operator std::string() const
 {
-    return std::to_string(n) + " mod(" + std::to_string(module) + ")";
+    return std::to_string(n);
 }
 
 std::ostream& operator<< (std::ostream& out, const Zn &other)
@@ -275,7 +275,7 @@ bool MultiGroup_Zn::operator>= (const MultiGroup_Zn &other) const
 
 MultiGroup_Zn::operator std::string() const
 {
-    return std::to_string(n) + " mod(" + std::to_string(module) + ")";
+    return std::to_string(n);
 }
 
 std::ostream& operator<< (std::ostream& out, const MultiGroup_Zn &other)

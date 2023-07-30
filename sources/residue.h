@@ -8,6 +8,7 @@ public:
 
 public:
     explicit Zn();
+    explicit Zn(int n);
     explicit Zn(int n, int module);
 
     void simplify();
@@ -36,6 +37,7 @@ public:
 class Zp : public Zn {
 public:
     explicit Zp();
+    explicit Zp(int n);
     explicit Zp(int n, int module);
 
     Zp operator~ ()                   const;

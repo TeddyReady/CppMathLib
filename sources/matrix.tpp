@@ -22,7 +22,7 @@ public:
             for(std::size_t j = 0; j < cols; ++j)
             {
                 if (i == j) data[i][j] = diagonalValue;
-                else data[i][j] = 0;
+                else data[i][j] = static_cast<T>(0);
             }
     }
     Matrix(const Matrix<T> &other): Matrix<T>(other.rows, other.cols)

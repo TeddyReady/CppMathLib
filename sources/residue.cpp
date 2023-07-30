@@ -1,6 +1,7 @@
 #include "residue.h"
 
-Zn::Zn(): n(0), module(1) {} 
+Zn::Zn(): n(0), module(1) {}
+Zn::Zn(int n) : n(n), module(-1) {}
 Zn::Zn(int n, int module): n(n), module(module)
 {
     if (module == 0)
@@ -23,10 +24,8 @@ void Zn::simplify()
 
 void Zn::operator= (const Zn &other)
 {
-    if (module == other.module)
-        n = other.n;
-    else
-        std::cerr << "ERROR in residue.cpp: Cannot copy residue with other module value!" << std::endl;
+    n = other.n;
+    module = other.module;
 }
 
 Zn Zn::operator- () const
@@ -36,6 +35,17 @@ Zn Zn::operator- () const
 
 Zn Zn::operator+ (const Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+    {
+        if (module == -1 && other.module != -1)
+            return Zn(n + other.n, other.module);
+        else if (module != -1 && other.module == -1)
+            return Zn(n + other.n, module);
+        else
+            return Zn(n + other.n);
+    }
+
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;
@@ -62,6 +72,16 @@ void Zn::operator-= (const Zn &other)
 
 Zn Zn::operator* (const Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+    {
+        if (module == -1 && other.module != -1)
+            return Zn(n * other.n, other.module);
+        else if (module != -1 && other.module == -1)
+            return Zn(n * other.n, module);
+        else
+            return Zn(n * other.n);
+    }
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;
@@ -128,6 +148,7 @@ std::ostream& operator<< (std::ostream& out, const Zn &other)
 }
 
 Zp::Zp() : Zn() {}
+Zp::Zp(int n) : Zn(n) {}
 Zp::Zp(int n, int module): Zn(n, module) 
 {
     if (!isPrime(module))
@@ -189,10 +210,8 @@ void MultiGroup_Zn::simplify()
 
 void MultiGroup_Zn::operator= (const MultiGroup_Zn &other)
 {
-    if (module == other.module)
-        n = other.n;
-    else
-        std::cerr << "ERROR in residue.cpp: Cannot copy residue with other module value!" << std::endl;
+    n = other.n;
+    module = other.module;
 }
 
 MultiGroup_Zn MultiGroup_Zn::operator~ () const

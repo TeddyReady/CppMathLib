@@ -118,20 +118,20 @@ public:
 
     bool isSquare() const { return (cols == rows); }
 
-    double det() const
+    T det() const
     {
         if (!isSquare())
         {
             std::cerr << "ERROR in matrix.tpp: Cannot calculate det of non sqyare matrix!" << std::endl;
-            return -100000000;            
+            return static_cast<T>(0);
         }
         if (rows == 1)
             return data[0][0];
         else if (rows == 2)
-            return (data[0][0] * data[1][1] - data[0][1] * data[1][0]);
+            return data[0][0] * data[1][1] - data[0][1] * data[1][0];
         else {
-            Matrix<T> tmp(rows - 1, rows - 1, 0);
-            double det = 0;
+            Matrix<T> tmp(rows - 1, rows - 1, static_cast<T>(0));
+            T det = static_cast<T>(0);
             std::size_t k1, k2;
             for(size_t i = 0; i < rows; ++i) {
                 k1 = 0;
@@ -145,7 +145,7 @@ public:
                     }
                     ++k1;
                 }
-                det += fastPower(-1, i + 2) * data[0][i] * tmp.det();
+                det += static_cast<T>(fastPower(-1, i + 2)) * data[0][i] * tmp.det();
             }
             return det;
         }

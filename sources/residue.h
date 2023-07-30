@@ -40,6 +40,8 @@ public:
     explicit Zp(int n);
     explicit Zp(int n, int module);
 
+    void operator= (const Zn &other);
+
     Zp operator~ ()                   const;
     Zp operator/ (const Zp &other)    const;
     void operator/= (const Zp &other);

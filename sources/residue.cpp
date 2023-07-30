@@ -159,6 +159,12 @@ Zp::Zp(int n, int module): Zn(n, module)
     }
 }
 
+void Zp::operator= (const Zn &other)
+{
+    n = other.n;
+    module = other.module;
+}
+
 Zp Zp::operator~ () const
 {
     for(int i = 0; i < module; ++i)

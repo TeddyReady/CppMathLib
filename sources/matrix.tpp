@@ -25,7 +25,7 @@ public:
                 else data[i][j] = 0;
             }
     }
-    explicit Matrix(const Matrix<T> &other): Matrix<T>(other.rows, other.cols)
+    Matrix(const Matrix<T> &other): Matrix<T>(other.rows, other.cols)
     {
         for(std::size_t i = 0; i < rows; ++i)
             for(std::size_t j = 0; j < cols; ++j)

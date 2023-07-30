@@ -12,6 +12,8 @@ public:
 
     void simplify();
 
+    void operator= (const Zn &other);
+
     Zn operator- ()                   const;
     Zn operator+ (const Zn &other)    const;
     void operator+= (const Zn &other);
@@ -51,6 +53,8 @@ public:
     explicit MultiGroup_Zn(int n, int module);
 
     void simplify();
+
+    void operator= (const MultiGroup_Zn &other);
 
     MultiGroup_Zn operator~ ()                           const;
     MultiGroup_Zn operator* (const MultiGroup_Zn &other) const;

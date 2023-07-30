@@ -21,6 +21,14 @@ void Zn::simplify()
         n += module;
 }
 
+void Zn::operator= (const Zn &other)
+{
+    if (module == other.module)
+        n = other.n;
+    else
+        std::cerr << "ERROR in residue.cpp: Cannot copy residue with other module value!" << std::endl;
+}
+
 Zn Zn::operator- () const
 {
     return Zn(-n, module);
@@ -177,6 +185,14 @@ void MultiGroup_Zn::simplify()
 
     while (n < 0)
         n += module;
+}
+
+void MultiGroup_Zn::operator= (const MultiGroup_Zn &other)
+{
+    if (module == other.module)
+        n = other.n;
+    else
+        std::cerr << "ERROR in residue.cpp: Cannot copy residue with other module value!" << std::endl;
 }
 
 MultiGroup_Zn MultiGroup_Zn::operator~ () const

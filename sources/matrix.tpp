@@ -83,7 +83,7 @@ public:
             return *this;    
         }
 
-        Matrix<T> result(rows, other.cols, 0);
+        Matrix<T> result(rows, other.cols, static_cast<T>(0));
 
         for(std::size_t i = 0; i < rows; ++i)
             for(std::size_t j = 0; j < other.cols; ++j)

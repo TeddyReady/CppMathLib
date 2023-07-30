@@ -15,6 +15,9 @@ Zn::Zn(int n, int module): n(n), module(module)
 
 void Zn::simplify()
 {
+    if (module == -1)
+        return;
+
     while (n >= module)
         n -= module;
 
@@ -158,6 +161,7 @@ Zp::Zp(int n, int module): Zn(n, module)
         this->module = 1; 
     }
 }
+Zp::Zp(const Zn &other) : Zn(other) {}
 
 void Zp::operator= (const Zn &other)
 {

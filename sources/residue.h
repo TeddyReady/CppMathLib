@@ -2,6 +2,8 @@
 #define RESIDUE_H
 #include "eulerfunction.h"
 
+class Zp;
+
 class Zn {
 public:
     int n, module;
@@ -39,12 +41,14 @@ public:
     explicit Zp();
     explicit Zp(int n);
     explicit Zp(int n, int module);
+    Zp(const Zn &other);
 
     void operator= (const Zn &other);
 
     Zp operator~ ()                   const;
     Zp operator/ (const Zp &other)    const;
     void operator/= (const Zp &other);
+
 };
 
 // Zn* inverse elements group

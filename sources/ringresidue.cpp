@@ -48,25 +48,19 @@ int RingResidue::order(const char *operation) const
             return -1;
         }
     } else {
+        if (type == ResidueType::Zn && not isPrime(module)) return -1;
+
         MultiGroup_Zn residue(n, module);
-        switch (type)
+        if (n == 1) return 1;
+        for (int i = 2; i <= residue.capacity(); ++i)
         {
-        case ResidueType::MultiGroup_Zn:
-        case ResidueType::Zp:
-            if (n == 1) return 1;
-            for (int i = 2; i <= residue.capacity(); ++i)
-            {
-                if (GCD(i, residue.capacity()) == 1) continue;
+            if (GCD(i, residue.capacity()) == 1) continue;
 
-                if (residue * residue == MultiGroup_Zn(1, module))
-                    return i;
-                else
-                    residue *= residue;
-            }
-            return -2;
-
-        default:
-            return -1;
+            if (residue * residue == MultiGroup_Zn(1, module))
+                return i;
+            else
+                residue *= residue;
         }
+        return -2;
     }
 }

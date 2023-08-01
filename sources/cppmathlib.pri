@@ -11,6 +11,7 @@ SOURCES += \
            $$PWD/rational.cpp \
 #           $$PWD/ringofmembers.cpp \
            $$PWD/residue.cpp \
+    $$PWD/ringresidue.cpp \
            $$PWD/symbollegandre.cpp \
            $$PWD/transpositiongroup.cpp \
 
@@ -25,5 +26,6 @@ HEADERS += \
            $$PWD/rational.h \
 #           $$PWD/ringofmembers.h \
            $$PWD/residue.h \
+    $$PWD/ringresidue.h \
            $$PWD/symbollegandre.h \
            $$PWD/transpositiongroup.h \

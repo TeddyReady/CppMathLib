@@ -25,6 +25,16 @@ void Zn::simplify()
         n += module;
 }
 
+int Zn::countOfGenerators(const char *operation) const
+{
+    if (not strcmp(operation, "+"))
+        return EulerFunction(module).solve();
+    else if (not strcmp(operation, "*") && isPrime(module))
+        return EulerFunction(module - 1).solve();
+    else
+        return -1;
+}
+
 void Zn::operator= (const Zn &other)
 {
     n = other.n;

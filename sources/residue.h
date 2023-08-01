@@ -14,6 +14,7 @@ public:
     explicit Zn(int n, int module);
 
     void simplify();
+    int countOfGenerators(const char *) const;
 
     void operator= (const Zn &other);
 

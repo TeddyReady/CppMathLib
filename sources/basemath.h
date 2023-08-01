@@ -2,6 +2,7 @@
 #define BASEMATH_H
 #include <algorithm>
 #include <iostream>
+#include <string.h>
 #include <vector>
 #include <string>
 #include <cmath>

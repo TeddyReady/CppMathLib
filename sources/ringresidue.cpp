@@ -16,3 +16,11 @@ int RingResidue::countOfGenerators(const char *operation) const
         return -1;
     }
 }
+
+int RingResidue::pow(int deg, const char *operation)
+{
+    if (not strcmp(operation, "+"))
+        return (n * deg) % module;
+    else
+        return modulePower(n, deg, module);
+}

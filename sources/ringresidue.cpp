@@ -29,7 +29,7 @@ int RingResidue::order(const char *operation) const
 {
     if (not strcmp(operation, "+"))
     {
-        Zp residue(n, module);
+        Zn residue(n, module);
         switch (type)
         {
         case ResidueType::Zn:
@@ -39,7 +39,7 @@ int RingResidue::order(const char *operation) const
             {
                 if (GCD(i, residue.capacity()) == 1) continue;
 
-                if (residue * Zp(i, module) == Zp(0, module))
+                if (residue * Zn(i, module) == Zn(0, module))
                     return i;
             }
             return -2;

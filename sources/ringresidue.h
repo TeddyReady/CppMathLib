@@ -3,8 +3,8 @@
 #include "residue.h"
 
 enum class ResidueType {
-    Zn,
-    Zp,
+    Zn           ,
+    Zp           ,
     MultiGroup_Zn,
 };
 

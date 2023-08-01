@@ -20,6 +20,7 @@ public:
     int countOfGenerators(const char *operation) const;
     int pow(int deg, const char *operation) const;
     int order(const char *operation) const;
+    static std::vector<int> solveLinear(int a, int b, int module);
 };
 
 #endif // RINGRESIDUE_H

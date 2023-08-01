@@ -62,3 +62,19 @@ int RingResidue::order(const char *operation) const
         return -2;
     }
 }
+
+std::vector<int> RingResidue::solveLinear(int a, int b, int module)
+{
+    Zn A(a, module), B(b, module);
+    int d = GCD(a, module);
+
+    if (b % d != 0) return std::vector<int>({-1});
+
+    else {
+        std::vector<int> answers;
+        for (int i = 0; i < module; ++i)
+            if (A * Zn(i, module) == B)
+                answers.push_back(i);
+        return answers;
+    }
+}

@@ -37,7 +37,7 @@ int RingResidue::order(const char *operation) const
             if (n == 0) return 1;
             for (int i = 2; i <= residue.capacity(); ++i)
             {
-                if (GCD(i, residue.capacity()) == 1) continue;
+                if (residue.capacity() % i != 0) continue;
 
                 if (residue * Zn(i, module) == Zn(0, module))
                     return i;
@@ -54,12 +54,10 @@ int RingResidue::order(const char *operation) const
         if (n == 1) return 1;
         for (int i = 2; i <= residue.capacity(); ++i)
         {
-            if (GCD(i, residue.capacity()) == 1) continue;
-
-            if (residue * residue == MultiGroup_Zn(1, module))
+            if (residue.capacity() % i != 0) continue;
+            if (modulePower(n, i, module) == 1)
                 return i;
-            else
-                residue *= residue;
+
         }
         return -2;
     }

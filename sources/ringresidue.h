@@ -3,8 +3,8 @@
 #include "residue.h"
 
 enum class ResidueType {
-    Zn,
-    Zp,
+    Zn           ,
+    Zp           ,
     MultiGroup_Zn,
 };
 
@@ -18,7 +18,7 @@ public:
     explicit RingResidue(int n, int module, ResidueType type);
 
     int countOfGenerators(const char *operation) const;
-
+    int pow(int deg, const char *operation);
 };
 
 #endif // RINGRESIDUE_H

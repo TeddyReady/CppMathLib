@@ -25,6 +25,11 @@ void Zn::simplify()
         n += module;
 }
 
+int Zn::capacity() const
+{
+    return module;
+}
+
 int Zn::countOfGenerators(const char *operation) const
 {
     if (not strcmp(operation, "+"))
@@ -226,6 +231,11 @@ void MultiGroup_Zn::simplify()
 
     while (n < 0)
         n += module;
+}
+
+int MultiGroup_Zn::capacity() const
+{
+    return EulerFunction(module).solve();
 }
 
 void MultiGroup_Zn::operator= (const MultiGroup_Zn &other)

@@ -14,6 +14,7 @@ public:
     explicit Zn(int n, int module);
 
     void simplify();
+    int capacity() const;
     int countOfGenerators(const char *) const;
 
     void operator= (const Zn &other);
@@ -62,6 +63,7 @@ public:
     explicit MultiGroup_Zn(int n, int module);
 
     void simplify();
+    int capacity() const;
 
     void operator= (const MultiGroup_Zn &other);
 

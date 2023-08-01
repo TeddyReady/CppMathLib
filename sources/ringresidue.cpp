@@ -17,10 +17,56 @@ int RingResidue::countOfGenerators(const char *operation) const
     }
 }
 
-int RingResidue::pow(int deg, const char *operation)
+int RingResidue::pow(int deg, const char *operation) const
 {
     if (not strcmp(operation, "+"))
         return (n * deg) % module;
     else
         return modulePower(n, deg, module);
+}
+
+int RingResidue::order(const char *operation) const
+{
+    if (not strcmp(operation, "+"))
+    {
+        Zp residue(n, module);
+        switch (type)
+        {
+        case ResidueType::Zn:
+        case ResidueType::Zp:
+            if (n == 0) return 1;
+            for (int i = 2; i <= residue.capacity(); ++i)
+            {
+                if (GCD(i, residue.capacity()) == 1) continue;
+
+                if (residue * Zp(i, module) == Zp(0, module))
+                    return i;
+            }
+            return -2;
+
+        default:
+            return -1;
+        }
+    } else {
+        MultiGroup_Zn residue(n, module);
+        switch (type)
+        {
+        case ResidueType::MultiGroup_Zn:
+        case ResidueType::Zp:
+            if (n == 1) return 1;
+            for (int i = 2; i <= residue.capacity(); ++i)
+            {
+                if (GCD(i, residue.capacity()) == 1) continue;
+
+                if (residue * residue == MultiGroup_Zn(1, module))
+                    return i;
+                else
+                    residue *= residue;
+            }
+            return -2;
+
+        default:
+            return -1;
+        }
+    }
 }

@@ -18,7 +18,8 @@ public:
     explicit RingResidue(int n, int module, ResidueType type);
 
     int countOfGenerators(const char *operation) const;
-    int pow(int deg, const char *operation);
+    int pow(int deg, const char *operation) const;
+    int order(const char *operation) const;
 };
 
 #endif // RINGRESIDUE_H

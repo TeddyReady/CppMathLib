@@ -78,3 +78,36 @@ std::vector<int> RingResidue::solveLinear(int a, int b, int module)
         return answers;
     }
 }
+
+int RingResidue::countOfAnswersPrimeQuadro(int a, int module)
+{
+    if (not isPrime(module))
+    {
+        std::cerr << "ERROR in reigresidue.cpp: module need be prime!" << std::endl;
+        return -2;
+    }
+
+   SymbolLegandre symbol(a, module);
+   if (symbol.solve() == 1) return 2;
+   else if (symbol.solve() == -1) return 0;
+   else return 1;
+}
+
+std::vector<int> RingResidue::solvePrimeQuadro(int a, int module)
+{
+    if (not isPrime(module))
+    {
+        std::cerr << "ERROR in reigresidue.cpp: module need be prime!" << std::endl;
+        return std::vector<int>({-2});
+    }
+
+    if (countOfAnswersPrimeQuadro(a, module) == 0)
+        return std::vector<int>({-1});
+
+    Zn A(a, module);
+    std::vector<int> answers;
+    for (int i = 0; i < module; ++i)
+        if (Zn(i, module) * Zn(i, module) == A)
+            answers.push_back(i);
+    return answers;
+}

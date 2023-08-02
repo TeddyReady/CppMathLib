@@ -1,5 +1,6 @@
 #ifndef RINGRESIDUE_H
 #define RINGRESIDUE_H
+#include "symbollegandre.h"
 #include "residue.h"
 
 enum class ResidueType {
@@ -21,6 +22,9 @@ public:
     int pow(int deg, const char *operation) const;
     int order(const char *operation) const;
     static std::vector<int> solveLinear(int a, int b, int module);
+
+    static int countOfAnswersPrimeQuadro(int a, int module);
+    static std::vector<int> solvePrimeQuadro(int a, int module);
 };
 
 #endif // RINGRESIDUE_H

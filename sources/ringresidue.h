@@ -4,10 +4,10 @@
 #include "residue.h"
 
 enum class ResidueType {
+    None         ,
     Zn           ,
     Zp           ,
     MultiGroup_Zn,
-    None         ,
 };
 
 class RingResidue {

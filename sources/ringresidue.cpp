@@ -63,6 +63,16 @@ int RingResidue::order(const char *operation) const
     }
 }
 
+int RingResidue::countOfAnswersLinear(int a, int b, int module)
+{
+    auto answers = solveLinear(a, b, module);
+
+    if (answers[0] == -1)
+        return 0;
+    else
+        return answers.size();
+}
+
 std::vector<int> RingResidue::solveLinear(int a, int b, int module)
 {
     Zn A(a, module), B(b, module);
@@ -109,5 +119,35 @@ std::vector<int> RingResidue::solvePrimeQuadro(int a, int module)
     for (int i = 0; i < module; ++i)
         if (Zn(i, module) * Zn(i, module) == A)
             answers.push_back(i);
+    return answers;
+}
+
+int RingResidue::countOfAnswersCompositeQuadro(int a, int module)
+{
+    auto answers = solveCompositeQuadro(a, module);
+
+    if (answers[0] == -1)
+        return 0;
+    else
+        return answers.size();
+}
+
+std::vector<int> RingResidue::solveCompositeQuadro(int a, int module)
+{
+    if (isPrime(module))
+    {
+        std::cerr << "ERROR in reigresidue.cpp: module cannot be prime!" << std::endl;
+        return std::vector<int>({-2});
+    }
+
+    Zn A(a, module);
+    std::vector<int> answers;
+    for (int i = 0; i < module; ++i)
+        if (Zn(i, module) * Zn(i, module) == A)
+            answers.push_back(i);
+
+    if (answers.empty())
+        return std::vector<int>({-1});
+
     return answers;
 }

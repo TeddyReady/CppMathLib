@@ -9,9 +9,9 @@ SOURCES += \
 #           $$PWD/groupproperties.cpp \
            $$PWD/mebiusfunction.cpp \
            $$PWD/rational.cpp \
-#           $$PWD/ringofmembers.cpp \
            $$PWD/residue.cpp \
-    $$PWD/ringresidue.cpp \
+    $$PWD/ringofmembers.cpp \
+           $$PWD/ringresidue.cpp \
            $$PWD/symbollegandre.cpp \
            $$PWD/transpositiongroup.cpp \
 
@@ -24,8 +24,8 @@ HEADERS += \
            $$PWD/matrix.tpp \
            $$PWD/mebiusfunction.h \
            $$PWD/rational.h \
-#           $$PWD/ringofmembers.h \
            $$PWD/residue.h \
-    $$PWD/ringresidue.h \
+           $$PWD/ringofmembers.tpp \
+           $$PWD/ringresidue.h \
            $$PWD/symbollegandre.h \
            $$PWD/transpositiongroup.h \

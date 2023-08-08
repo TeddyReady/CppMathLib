@@ -116,6 +116,9 @@ void Zn::operator*= (const Zn &other)
 
 bool Zn::operator== (const Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+        return (n == other.n);
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;
@@ -132,6 +135,9 @@ bool Zn::operator!= (const Zn &other) const
 
 bool Zn::operator< (const Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+        return (n < other.n);
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;
@@ -283,6 +289,9 @@ void MultiGroup_Zn::operator/= (const MultiGroup_Zn &other)
 
 bool MultiGroup_Zn::operator== (const MultiGroup_Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+        return (n == other.n);
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;
@@ -299,6 +308,9 @@ bool MultiGroup_Zn::operator!= (const MultiGroup_Zn &other) const
 
 bool MultiGroup_Zn::operator< (const MultiGroup_Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+        return (n < other.n);
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;

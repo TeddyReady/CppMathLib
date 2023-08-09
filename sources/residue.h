@@ -60,10 +60,12 @@ private:
 
 public:
     explicit MultiGroup_Zn();
+    explicit MultiGroup_Zn(int n);
     explicit MultiGroup_Zn(int n, int module);
 
     void simplify();
     int capacity() const;
+    int get_module() const;
 
     void operator= (const MultiGroup_Zn &other);
 

@@ -213,6 +213,7 @@ void Zp::operator/= (const Zp &other)
 }
 
 MultiGroup_Zn::MultiGroup_Zn(): n(0), module(1) {}
+MultiGroup_Zn::MultiGroup_Zn(int n) : n(n), module(-1) {}
 MultiGroup_Zn::MultiGroup_Zn(int n, int module): n(n), module(module)
 {
     if (this->module == 0)
@@ -232,6 +233,9 @@ MultiGroup_Zn::MultiGroup_Zn(int n, int module): n(n), module(module)
 
 void MultiGroup_Zn::simplify()
 {
+    if (module == -1)
+        return;
+
     while (n >= module)
         n -= module;
 
@@ -242,6 +246,11 @@ void MultiGroup_Zn::simplify()
 int MultiGroup_Zn::capacity() const
 {
     return EulerFunction(module).solve();
+}
+
+int MultiGroup_Zn::get_module() const
+{
+    return module;
 }
 
 void MultiGroup_Zn::operator= (const MultiGroup_Zn &other)
@@ -263,6 +272,16 @@ MultiGroup_Zn MultiGroup_Zn::operator~ () const
 
 MultiGroup_Zn MultiGroup_Zn::operator* (const MultiGroup_Zn &other) const
 {
+    if (module == -1 || other.module == -1)
+    {
+        if (module == -1 && other.module != -1)
+            return MultiGroup_Zn(n * other.n, other.module);
+        else if (module != -1 && other.module == -1)
+            return MultiGroup_Zn(n * other.n, module);
+        else
+            return MultiGroup_Zn(n * other.n);
+    }
+
     if (module != other.module)
     {
         std::cerr << "ERROR in residue.cpp: Modules does be equal!" << std::endl;

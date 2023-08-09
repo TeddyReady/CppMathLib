@@ -18,13 +18,21 @@ public:
     ~RingOfMembers() {}
 
     unsigned int getDeg() const { return deg - 1; }
+    void simplify()
+    {
+        while (members[deg - 1] == static_cast<T>(0) && deg != 1)
+        {
+            --deg;
+            members.pop_back();
+        }
+    }
 
     RingOfMembers operator -() const
     {
         RingOfMembers result(*this);
 
         for (unsigned int i = 0; i < result.deg; ++i)
-            result[i] = -result[i];
+            result.members[i] = -result.members[i];
 
         return result;
     }
@@ -36,12 +44,13 @@ public:
         while (result.deg < std::max(deg, other.deg))
         {
             ++result.deg;
-            result.members.insert(result.members.begin(), static_cast<T>(0));
+            result.members.push_back(static_cast<T>(0));
         }
 
-        for (int i = 0; i < result.deg; ++i)
-            result.members[i] = this->members[i] + other.members[i];
+        for (unsigned int i = 0; i < result.deg; ++i)
+            result.members[i] += (deg > other.deg ? members[i] : other.members[i]);
 
+        result.simplify();
         return result;
     }
 
@@ -60,7 +69,7 @@ public:
         *this = *this - other;
     }
 
-    RingOfMembers<T> operator *(const RingOfMembers& other) const
+    RingOfMembers<T> operator *(const RingOfMembers &other) const
     {
         RingOfMembers<T> result((deg + other.deg) - 1, static_cast<T>(0));
 
@@ -68,6 +77,18 @@ public:
             for (unsigned int j = 0; j < other.deg; ++j)
                 result.members[i + j] += members[i] * other.members[j];
 
+        result.simplify();
+        return result;
+    }
+
+    RingOfMembers<T> operator *(const T &value) const
+    {
+        RingOfMembers<T> result(*this);
+
+        for (unsigned int i = 0; i < deg; ++i)
+            result.members[i] *= value;
+
+        result.simplify();
         return result;
     }
 
@@ -75,11 +96,108 @@ public:
     {
         *this = *this * other;
     }
-//    RingOfMembers operator %(const RingOfMembers& other) const;
-//    friend RingOfMembers GCD(const RingOfMembers& member_1, const RingOfMembers& member_2);
+
+    RingOfMembers<T> operator %(const RingOfMembers<T> &other) const
+    {
+        return *this - (*this / other) * other;
+    }
+
+    void operator %=(const RingOfMembers<T> &other)
+    {
+        *this = *this % other;
+    }
+
+    RingOfMembers<T> operator /(const RingOfMembers<T> &other) const
+    {
+        RingOfMembers<T> origin(*this), result({static_cast<T>(0)});
+        RingOfMembers<T> tmp;
+
+        do {
+            tmp = RingOfMembers<T>::chainDevide(origin, other);
+            result += tmp;
+//            std::cout << result << " " << origin << " " << tmp << std::endl;
+        } while (not tmp.isZero());
+
+        result.simplify();
+        return result;
+    }
+
+    void operator /=(const RingOfMembers<T> &other)
+    {
+        *this = *this / other;
+    }
+
+    bool operator ==(const RingOfMembers<T> &other) const
+    {
+        if (isZero() && other.isZero()) return true;
+
+        return this->members == other.members;
+    }
+
+    bool operator !=(const RingOfMembers<T> &other) const
+    {
+        return not (this->members == other.members);
+    }
+
+    void operator /=(const RingOfMembers<T> &other) const
+    {
+        return not (*this == other);
+    }
+
+    friend RingOfMembers<T> GCD(const RingOfMembers<T> &B, const RingOfMembers<T> &A)
+    {
+        RingOfMembers<T> q, r, result, a = A, b = B;
+        if (b.deg < a.deg) std::swap(a, b);
+
+        if (RingOfMembers<T>(b % a).isZero())
+            return a;
+
+        do {
+            q = b / a;
+            r = b % a;
+            if (not r.isZero())
+                result = r;
+            b = a;
+            a = r;
+        } while (not r.isZero());
+
+        result.simplify();
+        return result;
+    }
+
+    static RingOfMembers<T> chainDevide(RingOfMembers<T> &origin, const RingOfMembers<T> &devider)
+    {
+        if (origin.isZero())
+            return RingOfMembers<T>({static_cast<T>(0)});
+
+        origin.simplify();
+
+        if (origin.deg < devider.deg)
+            return RingOfMembers<T>({static_cast<T>(0)});
+
+        else
+        {
+            RingOfMembers<T> result((origin.deg - devider.deg) + 1, static_cast<T>(0));
+            result.members[result.deg - 1] = origin.members[origin.deg - 1] * RingOfMembers<T>::get_inverse(devider.members[devider.deg - 1]);
+
+            origin -= devider * result;
+
+            return result;
+        }
+    }
+
+    bool isZero() const
+    {
+        for (unsigned int i = 0; i < deg; ++i)
+            if (members[i] != static_cast<T>(0))
+                return false;
+
+        return true;
+    }
+
+    static T get_inverse(const T &value);
 
     std::string to_string(const T &value) const;
-
     operator std::string() const
     {
         std::string result;
@@ -116,6 +234,7 @@ public:
             if (i + 1 <= deg && members[deg - (i + 1)] >= static_cast<T>(0))
                 result += "+";
         }
+        if (result == "") return "0";
 
         return result;
     }

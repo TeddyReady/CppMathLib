@@ -197,7 +197,11 @@ public:
 
     static T get_inverse(const T &value);
 
-    std::string to_string(const T &value) const;
+    std::string to_string(const T &value) const
+    {
+        return (std::string)value;
+    }
+
     operator std::string() const
     {
         std::string result;
@@ -244,5 +248,17 @@ public:
         return out << (std::string)other;
     }
 };
+
+template <> RingOfMembers<double> RingOfMembers<double>::chainDevide(RingOfMembers<double> &origin, const RingOfMembers<double> &devider);
+
+template <> int RingOfMembers<int>::get_inverse(const int &value);
+template <> double RingOfMembers<double>::get_inverse(const double &value);
+template <> Zn RingOfMembers<Zn>::get_inverse(const Zn &value);
+template <> Zp RingOfMembers<Zp>::get_inverse(const Zp &value);
+template <> Complex<int> RingOfMembers<Complex<int>>::get_inverse(const Complex<int> &value);
+template <> Complex<double> RingOfMembers<Complex<double>>::get_inverse(const Complex<double> &value);
+
+template <> std::string RingOfMembers<int>::to_string(const int &value) const;
+template <> std::string RingOfMembers<double>::to_string(const double &value) const;
 
 #endif //RING_OF_MEMBERS

@@ -1,5 +1,32 @@
 #include "ringofmembers.tpp"
 
+/* RingOfMembers::chainDevide */
+
+template <>
+RingOfMembers<double> RingOfMembers<double>::chainDevide(RingOfMembers<double> &origin, const RingOfMembers<double> &devider)
+{
+    if (origin.isZero())
+        return RingOfMembers<double>({static_cast<double>(0)});
+
+    origin.simplify();
+
+    if (origin.deg < devider.deg)
+        return RingOfMembers<double>({static_cast<double>(0)});
+
+    else
+    {
+        RingOfMembers<double> result((origin.deg - devider.deg) + 1, static_cast<double>(0));
+
+        result.members[result.deg - 1] =
+                    origin.members[origin.deg - 1] * RingOfMembers<double>::get_inverse(devider.members[devider.deg - 1]);
+//        );
+
+        origin -= devider * result;
+
+        return result;
+    }
+}
+
 /* RingOfMembers::get_inverse */
 
 template <>
@@ -77,28 +104,4 @@ template <>
 std::string RingOfMembers<double>::to_string(const double &value) const
 {
     return std::to_string(value);
-}
-
-template <>
-std::string RingOfMembers<Zn>::to_string(const Zn &value) const
-{
-    return (std::string)value;
-}
-
-template <>
-std::string RingOfMembers<Zp>::to_string(const Zp &value) const
-{
-    return (std::string)value;
-}
-
-template <>
-std::string RingOfMembers<Complex<int>>::to_string(const Complex<int> &value) const
-{
-    return (std::string)value;
-}
-
-template <>
-std::string RingOfMembers<Complex<double>>::to_string(const Complex<double> &value) const
-{
-    return (std::string)value;
 }

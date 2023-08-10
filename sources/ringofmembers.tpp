@@ -13,6 +13,7 @@ private:
 public:
     explicit RingOfMembers() : deg(0) {}
     explicit RingOfMembers(unsigned int deg, T value) : deg(deg) { members = std::vector<T>(deg, value); }
+    explicit RingOfMembers(std::vector<T> vector) : members(vector), deg(members.size()) {}
     explicit RingOfMembers(std::initializer_list<T> list) : members(list), deg(members.size()) {}
     RingOfMembers(const RingOfMembers &other) : members(other.members), deg(other.deg) {}
     ~RingOfMembers() {}

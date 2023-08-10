@@ -53,12 +53,6 @@ Zp RingOfMembers<Zp>::get_inverse(const Zp &value)
 }
 
 template <>
-MultiGroup_Zn RingOfMembers<MultiGroup_Zn>::get_inverse(const MultiGroup_Zn &value)
-{
-    return ~value;
-}
-
-template <>
 Complex<int> RingOfMembers<Complex<int>>::get_inverse(__attribute__((unused)) const Complex<int> &value)
 {
     std::cerr << "ERROR in ringofmembers.cpp: Cannot find inverse of gaussian integer variable!" << std::endl;
@@ -93,12 +87,6 @@ std::string RingOfMembers<Zn>::to_string(const Zn &value) const
 
 template <>
 std::string RingOfMembers<Zp>::to_string(const Zp &value) const
-{
-    return (std::string)value;
-}
-
-template <>
-std::string RingOfMembers<MultiGroup_Zn>::to_string(const MultiGroup_Zn &value) const
 {
     return (std::string)value;
 }

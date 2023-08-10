@@ -115,7 +115,6 @@ public:
         do {
             tmp = RingOfMembers<T>::chainDevide(origin, other);
             result += tmp;
-//            std::cout << result << " " << origin << " " << tmp << std::endl;
         } while (not tmp.isZero());
 
         result.simplify();

@@ -5,12 +5,13 @@ VPATH += $$PWD
 SOURCES += \
 #           $$PWD/algebrastructures.cpp \
            $$PWD/basemath.cpp \
+           $$PWD/complex.cpp \
            $$PWD/eulerfunction.cpp \
 #           $$PWD/groupproperties.cpp \
            $$PWD/mebiusfunction.cpp \
            $$PWD/rational.cpp \
            $$PWD/residue.cpp \
-    $$PWD/ringofmembers.cpp \
+           $$PWD/ringofmembers.cpp \
            $$PWD/ringresidue.cpp \
            $$PWD/symbollegandre.cpp \
            $$PWD/transpositiongroup.cpp \

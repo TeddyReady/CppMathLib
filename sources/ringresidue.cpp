@@ -11,6 +11,8 @@ int RingResidue::countOfGenerators(const char *operation) const
         return Zn(n, module).countOfGenerators(operation);
     case ResidueType::Zp:
         return Zp(n, module).countOfGenerators(operation);
+    case ResidueType::MultiGroup_Zn:
+        return MultiGroup_Zn(n, module).countOfGenerators(operation);
 
     default:
         return -1;

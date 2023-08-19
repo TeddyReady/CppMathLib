@@ -20,7 +20,7 @@ public:
     explicit RingResidue(int n, int module, ResidueType type);
 
     int countOfGenerators(const char *operation) const;
-    int pow(int deg, const char *operation) const;
+    int pow(int deg) const;
     int order(const char *operation) const;
 
     static int countOfAnswersLinear(int a, int b, int module);

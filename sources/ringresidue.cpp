@@ -19,12 +19,9 @@ int RingResidue::countOfGenerators(const char *operation) const
     }
 }
 
-int RingResidue::pow(int deg, const char *operation) const
+int RingResidue::pow(int deg) const
 {
-    if (not strcmp(operation, "+"))
-        return (n * deg) % module;
-    else
-        return modulePower(n, deg, module);
+    return modulePower(n, deg, module);
 }
 
 int RingResidue::order(const char *operation) const

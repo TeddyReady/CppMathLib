@@ -253,6 +253,14 @@ int MultiGroup_Zn::get_module() const
     return module;
 }
 
+int MultiGroup_Zn::countOfGenerators(const char *operation) const
+{
+    if (not strcmp(operation, "*") && isPrime(module))
+        return EulerFunction(module - 1).solve();
+    else
+        return -1;
+}
+
 void MultiGroup_Zn::operator= (const MultiGroup_Zn &other)
 {
     n = other.n;

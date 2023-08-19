@@ -66,6 +66,7 @@ public:
     void simplify();
     int capacity() const;
     int get_module() const;
+    int countOfGenerators(const char *) const;
 
     void operator= (const MultiGroup_Zn &other);
 

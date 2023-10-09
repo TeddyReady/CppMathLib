@@ -8,7 +8,8 @@ private:
     int degree;
 
 public:
-    BooleanFunction(std::initializer_list<bool> list);
+    explicit BooleanFunction(const std::vector<bool> &vec);
+    explicit BooleanFunction(std::initializer_list<bool> list);
 
     std::string printPolinomial() const;
 

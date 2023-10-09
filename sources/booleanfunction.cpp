@@ -1,11 +1,15 @@
 #include "booleanfunction.h"
 
-BooleanFunction::BooleanFunction(std::initializer_list<bool> list)
-    : func(list), degree(findMax2Degree(func.size()))
+BooleanFunction::BooleanFunction(const std::vector<bool> &vec)
+    : func(vec), degree(findMax2Degree(func.size()))
 {
-    if (func.size() / (pow(2, degree)) != 1) std::cout << "ERROR: incorrect BooleanFunction parameters."
-                             << "Func size can be only degree of 2!";
+    if (func.size() / (pow(2, degree)) != 1)
+        std::cout << "ERROR: incorrect BooleanFunction parameters."
+                  << "Func size can be only degree of 2!";
 }
+
+BooleanFunction::BooleanFunction(std::initializer_list<bool> list)
+    : BooleanFunction(std::vector<bool>(list)) {}
 
 std::string BooleanFunction::printPolinomial() const
 {

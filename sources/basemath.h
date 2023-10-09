@@ -32,4 +32,11 @@ long modulePower(long num, long deg, int module);
 // Num on module
 int toMod(int num, int module);
 
+// Convert size_t number to binary num with format
+std::string to2(size_t dec, int format = 0);
+
+int findMax2Degree(size_t number);
+
+int countOfSymbol(const std::string &str, char symbol);
+
 #endif // BASEMATH_H

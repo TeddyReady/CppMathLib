@@ -5,6 +5,7 @@ VPATH += $$PWD
 SOURCES += \
 #           $$PWD/algebrastructures.cpp \
            $$PWD/basemath.cpp \
+           $$PWD/booleanfunction.cpp \
            $$PWD/complex.cpp \
            $$PWD/eulerfunction.cpp \
 #           $$PWD/groupproperties.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
 #           $$PWD/algebrastructures.h \
            $$PWD/basemath.h \
+           $$PWD/booleanfunction.h \
            $$PWD/eulerfunction.h \
 #           $$PWD/groupproperties.h \
            $$PWD/complex.tpp \

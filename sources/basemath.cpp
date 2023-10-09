@@ -87,3 +87,61 @@ int toMod(int num, int module)
         return num;
     }
 }
+
+std::string to2(size_t dec, int format)
+{
+    std::string num;
+    if (dec == 0)
+    {
+        while (format != num.size())
+            num = "0" + num;
+
+        return num;
+    }
+
+    int degree = findMax2Degree(dec);
+    for (int i = degree; i >= 0; --i)
+    {
+        if (static_cast<int>(dec) - static_cast<int>(pow(2, i)) >= 0)
+        {
+            dec -= static_cast<size_t>(pow(2, i));
+            num.append("1");
+        }
+        else num.append("0");
+    }
+
+    if (format == 0 || format < num.size())
+        return num;
+    else
+    {
+        while (format != num.size())
+            num = "0" + num;
+
+        return num;
+    }
+}
+
+int findMax2Degree(size_t number)
+{
+    if (number == 0) return 0;
+
+    int degree = 0;
+    do {
+        if (number % 2 == 1) number -= 1;
+        if (number == 0) break;
+        number /= 2;
+        ++degree;
+    } while (number != 0);
+    return degree;
+}
+
+int countOfSymbol(const std::string &str, char symbol)
+{
+    int count = 0;
+    for (size_t i = 0; i < str.size(); ++i)
+        if (str.at(i) == symbol)
+            ++count;
+
+    return count;
+}
+

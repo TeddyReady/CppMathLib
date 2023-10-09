@@ -1,5 +1,6 @@
 #include "booleanfunction.h"
 
+BooleanFunction::BooleanFunction() {}
 BooleanFunction::BooleanFunction(const std::vector<bool> &vec)
     : func(vec), degree(findMax2Degree(func.size()))
 {
@@ -7,7 +8,6 @@ BooleanFunction::BooleanFunction(const std::vector<bool> &vec)
         std::cout << "ERROR: incorrect BooleanFunction parameters."
                   << "Func size can be only degree of 2!";
 }
-
 BooleanFunction::BooleanFunction(std::initializer_list<bool> list)
     : BooleanFunction(std::vector<bool>(list)) {}
 

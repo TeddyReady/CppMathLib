@@ -8,6 +8,7 @@ private:
     int degree;
 
 public:
+    explicit BooleanFunction();
     explicit BooleanFunction(const std::vector<bool> &vec);
     explicit BooleanFunction(std::initializer_list<bool> list);
 

@@ -56,6 +56,39 @@ std::string BooleanFunction::printPolinomial() const
     return polinom.erase(polinom.size() - 1, 1);
 }
 
+bool BooleanFunction::isBelongsToClass_S() const
+{
+    for (size_t i = 0; i < func.size(); ++i)
+        if (func.at(i) != not func.at(func.size() - 1 - i))
+            return false;
+
+    return true;
+}
+
+bool BooleanFunction::isBelongsToClass_L() const
+{
+    return (printPolinomial().find("\\cdot") == std::string::npos);
+}
+
+bool BooleanFunction::isBelongsToClass_M() const
+{
+    for (size_t i = 0; i < func.size() - 1; ++i)
+        if (static_cast<int>(func.at(i)) > static_cast<int>(func.at(i + 1)))
+            return false;
+
+    return true;
+}
+
+bool BooleanFunction::isBelongsToClass_T1() const
+{
+    return func.at(func.size() - 1) == 1;
+}
+
+bool BooleanFunction::isBelongsToClass_T0() const
+{
+    return func.at(0) == 0;
+}
+
 BooleanFunction::operator std::string() const
 {
     std::string str("f(");

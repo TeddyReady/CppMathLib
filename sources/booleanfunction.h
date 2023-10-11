@@ -13,6 +13,11 @@ public:
     explicit BooleanFunction(std::initializer_list<bool> list);
 
     std::string printPolinomial() const;
+    bool isBelongsToClass_S() const;
+    bool isBelongsToClass_L() const;
+    bool isBelongsToClass_M() const;
+    bool isBelongsToClass_T1() const;
+    bool isBelongsToClass_T0() const;
 
     operator std::string() const;
     friend std::ostream& operator<< (std::ostream& out, const BooleanFunction &other);

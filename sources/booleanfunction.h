@@ -19,6 +19,8 @@ public:
     bool isBelongsToClass_T1() const;
     bool isBelongsToClass_T0() const;
 
+    static bool isSystemFull(const std::vector<BooleanFunction> &system);
+
     operator std::string() const;
     friend std::ostream& operator<< (std::ostream& out, const BooleanFunction &other);
 };

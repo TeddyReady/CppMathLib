@@ -89,6 +89,38 @@ bool BooleanFunction::isBelongsToClass_T0() const
     return func.at(0) == 0;
 }
 
+bool BooleanFunction::isSystemFull(const std::vector<BooleanFunction> &system)
+{
+    std::vector<std::vector<bool>> statistic;
+
+    for (size_t i = 0; i < system.size(); ++i)
+    {
+        std::vector<bool> points;
+
+        points.push_back(system.at(i).isBelongsToClass_S());
+        points.push_back(system.at(i).isBelongsToClass_L());
+        points.push_back(system.at(i).isBelongsToClass_M());
+        points.push_back(system.at(i).isBelongsToClass_T1());
+        points.push_back(system.at(i).isBelongsToClass_T0());
+
+        statistic.push_back(points);
+    }
+
+    for (size_t func = 0; func < system.size(); ++func)
+        for (size_t i = 0; i < statistic.at(func).size(); ++i)
+        {
+            int pointCounter = system.size();
+            for (size_t j = 0; j < system.size(); ++j)
+                if (statistic[j][i] == 1)
+                    --pointCounter;
+
+            if (pointCounter == 0)
+                return false;
+        }
+
+    return true;
+}
+
 BooleanFunction::operator std::string() const
 {
     std::string str("f(");

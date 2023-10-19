@@ -101,17 +101,17 @@ public:
     // Return Matrix whithout 1/det
     Matrix<T> operator~ () const
     {
-        if(!isSquare() || det() == 0) 
+        if(!isSquare() || det() == static_cast<T>(0))
         {
             std::cerr << "ERROR in matrix.tpp: Matrix does be square and det cannot be equal to zero!" << std::endl;
             return *this;
         }
 
-        Matrix<T> result(rows, cols, 0);
+        Matrix<T> result(rows, cols, static_cast<T>(0));
 
         for (std::size_t i = 0; i < rows; ++i)
             for (std::size_t j = 0; j < cols; ++j)
-                result.data[i][j] = minor(i, j).det() * fastPower(-1, i + j);
+                result.data[i][j] = minor(i, j).det() * static_cast<T>(fastPower(-1, i + j));
 
         return result.trans();
     }
@@ -153,7 +153,7 @@ public:
 
     Matrix<T> trans() const
     {
-        Matrix<T> matrix(cols, rows, 0);
+        Matrix<T> matrix(cols, rows, static_cast<T>(0));
 
         for(std::size_t i = 0; i < cols; ++i)
             for(std::size_t j = 0; j < rows; ++j)
@@ -170,7 +170,7 @@ public:
             return *this;
         }
 
-        Matrix<T> tmp(rows - 1, rows - 1, 0);
+        Matrix<T> tmp(rows - 1, rows - 1, static_cast<T>(0));
         
         tmp.data.clear();
         tmp.data.resize(data.size() - 1);

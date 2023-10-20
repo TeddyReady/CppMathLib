@@ -116,6 +116,24 @@ public:
         return result.trans();
     }
 
+    bool operator== (const Matrix<T> &other) const
+    {
+        if (rows != other.rows || cols != other.cols)
+            return false;
+
+        for (int i = 0; i < rows; ++i)
+            for (int j = 0; j < cols; ++j)
+                if (data[i][j] != other.data[i][j])
+                    return false;
+
+        return true;
+    }
+
+    bool operator!= (const Matrix<T> &other) const
+    {
+        return !(*this == other);
+    }
+
     bool isSquare() const { return (cols == rows); }
 
     T det() const
@@ -153,7 +171,7 @@ public:
 
     Matrix<T> trans() const
     {
-        Matrix<T> matrix(cols, rows, static_cast<T>(0));
+        Matrix<T> matrix(cols, rows);
 
         for(std::size_t i = 0; i < cols; ++i)
             for(std::size_t j = 0; j < rows; ++j)

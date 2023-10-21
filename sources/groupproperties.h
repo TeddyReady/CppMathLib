@@ -15,7 +15,7 @@ public:
 
     void setGroup(Set gp, int n) {group = gp; this->n = n;}
     int Exp() const;
-    QString getCode() const;
+    std::string getCode() const;
     int getGroups() const { return GROUPS_COUNT;}
 private:
     Set group;

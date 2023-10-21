@@ -25,6 +25,13 @@ public:
                 else data[i][j] = static_cast<T>(0);
             }
     }
+    explicit Matrix(const std::vector<std::vector<T>> &base)
+        : Matrix<T>(base.size(), base[0].size())
+    {
+        for(std::size_t i = 0; i < rows; ++i)
+            for(std::size_t j = 0; j < cols; ++j)
+                data[i][j] = base[i][j];
+    }
     Matrix(const Matrix<T> &other): Matrix<T>(other.rows, other.cols)
     {
         for(std::size_t i = 0; i < rows; ++i)
